@@ -35,15 +35,15 @@ export class LoginPage implements OnInit {
 
   async ngOnInit() {
 
+    this.loginForm = new FormGroup({
+      email: new FormControl('', Validators.compose([Validators.required, Validators.email])),
+      password: new FormControl('', Validators.compose([Validators.required]))
+    });
+
     await this.fAuthService.isLoggedIn().then(res => {
       if(res) {
         this.router.navigate(['/home']);
       }
-    })
-
-    this.loginForm = new FormGroup({
-      email: new FormControl('', Validators.compose([Validators.required, Validators.email])),
-      password: new FormControl('', Validators.compose([Validators.required]))
     });
 
     this.isPlatformCordova = this.platform.is('cordova');

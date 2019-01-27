@@ -9,7 +9,7 @@ const routes: Routes = [
     path: '', redirectTo: 'login', pathMatch: 'full'
   },
   {
-    path: 'login', canActivate: [LoginGuard], loadChildren: './pages/login/login.module#LoginPageModule'
+    path: 'login', loadChildren: './pages/login/login.module#LoginPageModule'
   },
   {
     path: 'signup', loadChildren: './pages/signup/signup.module#SignupPageModule'

@@ -18,7 +18,7 @@ export class FirebaseAuthService {
   backendUrl: string = environment.backendUrl;
   rb_api_endpoints: any = environment.rb_api_endpoints;
   token: string;
-  loggedInUser: UserModel;
+  loggedInUser: UserModel = new UserModel();
 
   constructor(
     private http: HttpClient,
@@ -47,7 +47,7 @@ export class FirebaseAuthService {
               id: user.user.uid
             };
 
-            this.sService.loggedInUser = this.loggedInUser;
+            this.sService.loggedInUser.next(this.loggedInUser);
 
             this.addNewUserDetails(this.loggedInUser);
 
@@ -61,6 +61,7 @@ export class FirebaseAuthService {
   }
 
   doLogin(value: any): Promise<any> {
+    debugger;
     try {
       return new Promise<any>((resolve, reject) => {
         this.afAuth.auth.signInWithEmailAndPassword(value.email, value.password)
@@ -71,7 +72,8 @@ export class FirebaseAuthService {
             });
 
             await this.afStore.collection('users').doc(res.user.uid).get().subscribe(res => {
-              this.sService.loggedInUser = res.data().metadata as UserModel;
+              this.loggedInUser = res.data().metadata as UserModel;
+              this.sService.loggedInUser.next(res.data().metadata as UserModel);
             }, error => {
 
             });
@@ -88,8 +90,12 @@ export class FirebaseAuthService {
   async isLoggedIn(): Promise<boolean> {
     try {
       return new Promise<boolean>(async (resolve, reject) => {
-        await this.afAuth.auth.onAuthStateChanged(function (user) {
+        await this.afAuth.auth.onAuthStateChanged((user) => {
           if (user) {
+            this.loggedInUser.id = user.uid;
+            if(!this.loggedInUser.name) {
+              this.getUserDetails();
+            }
             return resolve(true);
           } else {
             return resolve(false);
@@ -104,6 +110,18 @@ export class FirebaseAuthService {
 
   async doLogout(): Promise<void> {
     return await this.afAuth.auth.signOut();
+  }
+
+  async getUserDetails() {
+
+    return new Promise<any>((resolve, reject) => {
+      this.afStore.collection('users').doc(this.loggedInUser.id).get().subscribe(res => {
+        this.loggedInUser = res.data().metadata as UserModel;
+        this.sService.loggedInUser.next(res.data().metadata as UserModel);
+
+        return resolve(res.data().metadata);
+      });
+    });
   }
 
   async getToken(): Promise<string> {

@@ -23,8 +23,6 @@ import { FirebaseAuthService } from './services/firebase-auth.service';
 import { MarketService } from './services/market.service';
 import { SharedService } from './services/shared.service';
 
-import { UserPopoverPageModule } from './pages/user-popover/user-popover.module';
-
 @NgModule({
   declarations: [
     AppComponent
@@ -43,8 +41,7 @@ import { UserPopoverPageModule } from './pages/user-popover/user-popover.module'
     AngularFireAuthModule,
     AngularFirestoreModule,
     //Custom
-    AppRoutingModule,
-    UserPopoverPageModule
+    AppRoutingModule
   ],
 
   providers: [

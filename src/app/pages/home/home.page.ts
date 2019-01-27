@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { LoadingController, ToastController, PopoverController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 import { TapticEngine } from '@ionic-native/taptic-engine/ngx';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { MarketService } from '../../services/market.service';
 import { FirebaseAuthService } from '../../services/firebase-auth.service';
 import { SharedService } from '../../services/shared.service';
-
-import { UserPopoverPage } from '../user-popover/user-popover.page';
 
 @Component({
   selector: 'app-home',
@@ -31,7 +29,6 @@ export class HomePage implements OnInit {
     private fAuthService: FirebaseAuthService,
     private router: Router,
     private toastCtrl: ToastController,
-    private popoverCtrl: PopoverController,
     private sService: SharedService
   ) { }
 
@@ -63,7 +60,10 @@ export class HomePage implements OnInit {
 
       this.removeLoading();
     }).catch(error => {
+      if(error.error.message)
       this.showToast(error.error.message);
+      else
+      this.showToast("API not responding");
 
       this.removeLoading();
     });
@@ -111,17 +111,6 @@ export class HomePage implements OnInit {
       await this.loading.dismiss();
       this.loading = null;
     }
-  }
-
-  async showUserPopover(ev: Event) {
-    const popover = await this.popoverCtrl.create({
-      component: UserPopoverPage,
-      event: ev,
-      componentProps: {
-        user: this.sService.loggedInUser
-      }
-    });
-    return await popover.present();
   }
 
   async doLogout() {
