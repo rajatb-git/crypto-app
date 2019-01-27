@@ -1,0 +1,56 @@
+<ion-header>
+</ion-header>
+
+<ion-content padding class="login-content">
+
+  <form [formGroup]="loginForm" (ngSubmit)="doLogin()">
+    <ion-grid fixed>
+      <ion-row no-padding>
+
+        <ion-col offset-md="3" size-md="6" size="12" text-center>
+          <img src="./assets/rb.png" />
+        </ion-col>
+
+        <ion-col offset-md="3" size-md="6" size="12" text-center>
+          <h3 class="text">
+            Track and find prices of any cryptocurrency you like in any unit!
+          </h3>
+          <p class="text">
+            Continue by logging in!
+          </p>
+        </ion-col>
+
+        <ion-col offset-md="3" size-md="6" size="12">
+          <ion-card>
+            <ion-card-content>
+              <div class="error">{{errorMsg}}</div>
+              <ion-input class="border-bottom" placeholder="Email" name="email" clear-input="true" formControlName="email"
+                type="email"></ion-input>
+
+              <ion-input placeholder="Password" clear-input="true" name="password" formControlName="password" type="password"></ion-input>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col offset-md="3" size-md="6" size="12" class="submit-button-col">
+          <ion-button (keyup.enter)="doLogin()" expand="block" color="medium" type="submit" [disabled]="!loginForm.valid">Login</ion-button>
+        </ion-col>
+
+        <ion-col offset-md="3" size-md="6" size="12" text-center>
+          <ion-button fill="clear" (click)="goToSignup()">New user? Register here!</ion-button>
+        </ion-col>
+
+        <ion-col offset-md="3" size-md="6" size="12" text-center class="touch-id-col" *ngIf="isPlatformCordova">
+          <ion-button fill="clear" (click)="loadTouchId()" class="touch-id-icon" color="medium">
+            <ion-icon name="finger-print"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+  <div class="disclaimer">
+    This webiste is for demo puposes only and demostrates an app with limited functionality.<br />
+    Copyright © 2018. All rights reserved
+  </div>
+</ion-content>

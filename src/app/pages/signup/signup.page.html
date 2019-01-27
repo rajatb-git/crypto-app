@@ -1,0 +1,51 @@
+<ion-header>
+</ion-header>
+
+<ion-content padding class="signup-content">
+
+  <form [formGroup]="signupForm" (ngSubmit)="doSignup()">
+    <ion-grid fixed>
+      <ion-row no-padding>
+
+        <ion-col offset-md="3" size-md="6" size="12" text-center>
+          <img src="./assets/rb.png">
+        </ion-col>
+
+        <ion-col offset-md="3" size-md="6" size="12" text-center>
+          <h3 class="text">
+            Track and find prices of any cryptocurrency you like in any unit!
+          </h3>
+          <p class="text">
+            Continue by creating a new account!
+          </p>
+        </ion-col>
+
+        <ion-col offset-md="3" size-md="6" size="12" class="signup-card">
+          <ion-card>
+            <ion-card-content>
+              <div class="error">{{errorMsg}}</div>
+              <ion-input class="border-bottom" formControlName="name" name="name" placeholder="Name" clearInput type="text"></ion-input>
+
+              <ion-input class="border-bottom" formControlName="email" name="email" placeholder="Email" clearInput type="email"></ion-input>
+
+              <ion-input formControlName="password" placeholder="Password" name="password" clearInput type="password"></ion-input>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col offset-md="3" size-md="6" size="12" class="submit-button-col">
+          <ion-button fill="solid" expand="block" type="submit" color="medium">Create Account</ion-button>
+        </ion-col>
+
+        <ion-col offset-md="3" size-md="6" size="12" text-center>
+          <ion-button fill="clear" (click)="goToLogin()">Already registered? Login</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+
+  <div class="disclaimer">
+    This webiste is for demo puposes only and demostrates an app with limited functionality.<br />
+    Copyright © 2018. All rights reserved
+  </div>
+</ion-content>

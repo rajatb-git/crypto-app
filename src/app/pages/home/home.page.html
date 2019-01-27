@@ -1,0 +1,123 @@
+<ion-header>
+
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="showUserPopover($event)">
+        <ion-icon name="contact"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Cryptocurrency
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="home-content">
+  <ion-grid fixed>
+    <ion-row no-padding>
+      <ion-col no-padding offset-md="3" size-md="6" size="12">
+        <ion-card class="result-card" *ngIf="result">
+          <ion-card-header>
+            <ion-card-title>
+              <span>{{result.name}} ({{result.symbol}})</span>
+              <span class="close-icon">
+                <ion-icon name="close" (click)="reset()"></ion-icon>
+              </span>
+            </ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            Current price: <span class="result-value">{{result.quote.price}}</span>&nbsp;<span class="result-value-unit">{{result.currency}}</span>
+
+            <ion-list class="percentage-changes-list">
+              <ion-item [ngClass]="{'down': result.quote.percent_change_1h < 0, 'up': result.quote.percent_change_1h > 0}">
+                <ion-avatar slot="start">
+                  <ion-icon *ngIf="result.quote.percent_change_1h == 0" name="hand" class="trend-status-icon"></ion-icon>
+                  <ion-icon *ngIf="result.quote.percent_change_1h > 0" name="trending-up" class="trend-status-icon"></ion-icon>
+                  <ion-icon *ngIf="result.quote.percent_change_1h < 0" name="trending-down" class="trend-status-icon"></ion-icon>
+                </ion-avatar>
+                <ion-label>
+                  <h3>{{result.quote.percent_change_1h}}%</h3>
+                  <p class="text">1 Hour</p>
+                </ion-label>
+              </ion-item>
+
+              <ion-item [ngClass]="{'down': result.quote.percent_change_24h < 0, 'up': result.quote.percent_change_24h >= 0}">
+                <ion-avatar slot="start">
+                  <ion-icon *ngIf="result.quote.percent_change_24h == 0" name="hand" class="trend-status-icon"></ion-icon>
+                  <ion-icon *ngIf="result.quote.percent_change_24h >= 0" name="trending-up" class="trend-status-icon"></ion-icon>
+                  <ion-icon *ngIf="result.quote.percent_change_24h < 0" name="trending-down" class="trend-status-icon"></ion-icon>
+                </ion-avatar>
+                <ion-label>
+                  <h3>{{result.quote.percent_change_24h}}%</h3>
+                  <p class="text">24 Hours</p>
+                </ion-label>
+              </ion-item>
+
+              <ion-item [ngClass]="{'down': result.quote.percent_change_7d < 0, 'up': result.quote.percent_change_7d >= 0}">
+                <ion-avatar slot="start">
+                  <ion-icon *ngIf="result.quote.percent_change_7d == 0" name="hand" class="trend-status-icon"></ion-icon>
+                  <ion-icon *ngIf="result.quote.percent_change_7d >= 0" name="trending-up" class="trend-status-icon"></ion-icon>
+                  <ion-icon *ngIf="result.quote.percent_change_7d < 0" name="trending-down" class="trend-status-icon"></ion-icon>
+                </ion-avatar>
+                <ion-label>
+                  <h3>{{result.quote.percent_change_7d}}%</h3>
+                  <p class="text">7 Days</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+
+          <ion-card-header>
+            <ion-chip *ngFor="let tag of result.tags">
+              <ion-label>{{tag}}</ion-label>
+            </ion-chip>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+
+      <ion-col no-padding offset-md="3" size-md="6" size="12">
+        <ion-card class="fetch-quote-card">
+          <form [formGroup]="cryptoForm" (ngSubmit)="submitCryptoForm()">
+            <ion-img src="/assets/crypto.jpeg"></ion-img>
+            <ion-card-header class="top">
+              <ion-card-subtitle class="text">Fetch current market rate</ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content>
+              <div class="error">{{errorMsg}}</div>
+              <ion-input class="all-caps border-bottom" placeholder="Currency Symbol" clear-input="true"
+                formControlName="symbol" type="text"></ion-input>
+
+              <ion-input class="all-caps" placeholder="Conversion Unit" clear-input="true" formControlName="convert"
+                type="text"></ion-input>
+            </ion-card-content>
+
+            <ion-card-header>
+              <ion-button (keyup.enter)="submitCryptoForm()" expand="block" color="medium" type="submit" [disabled]="!cryptoForm.valid">Submit</ion-button>
+            </ion-card-header>
+          </form>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="quicklinks">
+      <ion-col offset-md="3" size-md="3" size=6>
+        <ion-button color="medium" expand="block" fill="outline" (click)="zecToUsd()">ZEC to USD</ion-button>
+      </ion-col>
+
+      <ion-col size-md="3" size=6>
+        <ion-button color="medium" expand="block" fill="outline" (click)="ethToUsd()">ETH to USD</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="disclaimer">
+    This webiste is for demo puposes only and demostrates an app with limited functionality.<br />
+    Copyright © 2018. All rights reserved
+  </div>
+</ion-content>

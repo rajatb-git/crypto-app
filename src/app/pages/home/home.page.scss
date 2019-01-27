@@ -1,0 +1,84 @@
+.home-content {
+  --background: var(--ion-color-dark);
+
+  ion-card {
+    --background: var(--ion-color-black);
+
+    ion-input {
+      color: var(--ion-color-white);
+      font-weight: 500;
+    }
+  }
+
+  ion-toolbar {
+    --background: var(--ion-color-black);
+  }
+
+  .fetch-quote-card {
+    .all-caps {
+      text-transform: uppercase;
+    }
+  }
+
+  .text {
+    color: var(--ion-color-light);
+  }
+
+  .border-bottom {
+    border-bottom: 0.5px solid var(--ion-color-medium);
+  }
+
+  .quicklinks {
+    margin: 24px 10px;
+  }
+
+  .result-card {
+    color: var(--ion-color-white);
+
+    ion-card-title {
+      color: var(--ion-color-white);
+    }
+
+    .name {
+      float: left;
+    }
+
+    .symbol {
+      float: right;
+    }
+
+    .close-icon {
+      float: right;
+      font-size: 2rem;
+    }
+
+    ion-chip {
+      background: var(--ion-color-medium);
+    }
+  }
+
+  .result-value {
+    color: white;
+    font-weight: 600;
+  }
+
+  .result-value-unit {
+    color: white;
+  }
+
+  .percentage-changes-list {
+    .down {
+      color: var(--ion-color-danger);
+      --background: var(--ion-color-black);
+    }
+
+    .up {
+      color: var(--ion-color-success);
+      --background: var(--ion-color-black);
+    }
+
+    .trend-status-icon {
+      font-size: 2.5rem;
+    }
+  }
+}
