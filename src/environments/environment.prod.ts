@@ -11,7 +11,7 @@ export const environment = {
   backendUrl: "https://rbapi.herokuapp.com/",
   rb_api_endpoints: {
     getCustomQuote: 'getCustomQuote',
-    getTrendingQuote: 'getTrendingQuote',
+    getTopMarketCap: 'getTopMarketCap',
     addNewUser: 'addNewUser'
   }
 };
