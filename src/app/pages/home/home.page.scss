@@ -36,49 +36,50 @@
     color: var(--ion-color-white);
 
     ion-card-title {
-      color: var(--ion-color-white);
+        color: var(--ion-color-white);
     }
 
     .name {
-      float: left;
+        float: left;
     }
 
     .symbol {
-      float: right;
+        float: right;
     }
 
     .close-icon {
-      float: right;
-      font-size: 2rem;
+        float: right;
+        font-size: 2rem;
     }
 
     ion-chip {
-      background: var(--ion-color-medium);
-    }
-  }
-
-  .result-value {
-    color: white;
-    font-weight: 600;
-  }
-
-  .result-value-unit {
-    color: white;
-  }
-
-  .percentage-changes-list {
-    .down {
-      color: var(--ion-color-danger);
-      --background: var(--ion-color-black);
+        background: var(--ion-color-medium);
     }
 
-    .up {
-      color: var(--ion-color-success);
-      --background: var(--ion-color-black);
-    }
+    .percentage-changes-list {
 
-    .trend-status-icon {
-      font-size: 2.5rem;
+        .down {
+            color: var(--ion-color-danger);
+            --background: var(--ion-color-black);
+        }
+
+        .up {
+            color: var(--ion-color-success);
+            --background: var(--ion-color-black);
+        }
+
+        .trend-status-icon {
+            font-size: 2.5rem;
+        }
+
+        .result-value {
+            color: white;
+            font-weight: 600;
+        }
+
+        .result-value-unit {
+            color: white;
+        }
     }
-  }
+}
 }

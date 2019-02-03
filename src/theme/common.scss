@@ -11,3 +11,24 @@ ion-toolbar {
     text-align: center;
     font-weight: 500;
 }
+
+.list-md {
+    padding-top: initial;
+    padding-bottom: initial;
+}
+
+.list-md > .item-block:last-child {
+    border-bottom: 0px;
+}
+
+.list-md > .item-block:first-child {
+    border-top: 0.55px solid var(--ion-color-light);
+}
+
+.no-pointer {
+    cursor: default;
+}
+
+.pointer {
+    cursor: pointer;
+}

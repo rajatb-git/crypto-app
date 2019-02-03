@@ -16,8 +16,8 @@ import { TapticEngine } from '@ionic-native/taptic-engine/ngx';
 })
 export class LoginPage implements OnInit {
 
-  loginForm: FormGroup;
-  errorMsg: string;
+  loginForm: any;
+  errorMsg: string = "";
   loading: any = null;
   isPlatformCordova: boolean = false;
 
@@ -128,7 +128,7 @@ export class LoginPage implements OnInit {
   }
 
   reset(): void {
-    this.errorMsg = null;
+    this.errorMsg = "";
   }
 
   async doLogin() {
@@ -196,7 +196,7 @@ export class LoginPage implements OnInit {
     }
   }
 
-  tapticNotification(type) {
+  tapticNotification(type: any) {
     if (!this.isPlatformCordova) return;
 
     this.taptic.notification({

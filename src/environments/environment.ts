@@ -14,7 +14,8 @@ export const environment = {
   },
   backendUrl: "http://localhost:3000/",
   rb_api_endpoints: {
-    getQuote: 'getQuote',
+    getCustomQuote: 'getCustomQuote',
+    getTopMarketCap: 'getTopMarketCap',
     addNewUser: 'addNewUser'
   }
 };

@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="doLogout()">
+        <ion-icon name="power"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Top Cryptocurrencies by Market Capitalization
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="list-page">
+
+  <ion-grid fixed>
+    <ion-row no-padding>
+      <ion-col no-padding offset-md="2" size-md="8" size="12" offset-lg="3" size-lg="6">
+
+        <!-- <ion-card class="transparent-card">
+          <ion-card-content no-padding>
+            <ion-item>
+              <ion-label>Action Sheet</ion-label>
+              <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="Select One">
+                <ion-select-option value="red">Red</ion-select-option>
+                <ion-select-option value="purple">Purple</ion-select-option>
+                <ion-select-option value="yellow">Yellow</ion-select-option>
+                <ion-select-option value="orange">Orange</ion-select-option>
+                <ion-select-option value="green">Green</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-card-content>
+        </ion-card> -->
+
+        <ion-card class="listItem-card" *ngFor="let listItem of listingData">
+          <ion-card-header>
+            <ion-card-title>
+              <span>
+                <ion-avatar slot="start">
+                  <img [src]="'https://www.cryptocompare.com' + listItem.CoinInfo.ImageUrl">
+                </ion-avatar>
+              </span>
+              <span>{{listItem.CoinInfo.FullName}} ({{listItem.CoinInfo.Name}})</span>
+            </ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            Current price: <span class="listItem-value">{{listItem.RAW[currency].PRICE}}</span>&nbsp;<span class="listItem-value-unit">{{currency}}</span>
+
+            <ion-list class="percentage-changes-list">
+              <ion-item [ngClass]="{'down': listItem.RAW[currency].CHANGEPCT24HOUR < 0, 'up': listItem.RAW[currency].CHANGEPCT24HOUR >= 0}">
+                <ion-avatar slot="start">
+                  <ion-icon *ngIf="listItem.RAW[currency].CHANGEPCT24HOUR == 0" name="hand" class="trend-status-icon"></ion-icon>
+                  <ion-icon *ngIf="listItem.RAW[currency].CHANGEPCT24HOUR >= 0" name="trending-up" class="trend-status-icon"></ion-icon>
+                  <ion-icon *ngIf="listItem.RAW[currency].CHANGEPCT24HOUR < 0" name="trending-down" class="trend-status-icon"></ion-icon>
+                </ion-avatar>
+                <ion-label>
+                  <h3>{{listItem.RAW[currency].CHANGEPCT24HOUR}}%</h3>
+                  <p class="text">24 Hours</p>
+                </ion-label>
+              </ion-item>
+
+              <ion-item [ngClass]="{'down': listItem.RAW[currency].CHANGEPCTDAY < 0, 'up': listItem.RAW[currency].CHANGEPCTDAY >= 0}">
+                <ion-avatar slot="start">
+                  <ion-icon *ngIf="listItem.RAW[currency].CHANGEPCTDAY == 0" name="hand" class="trend-status-icon"></ion-icon>
+                  <ion-icon *ngIf="listItem.RAW[currency].CHANGEPCTDAY >= 0" name="trending-up" class="trend-status-icon"></ion-icon>
+                  <ion-icon *ngIf="listItem.RAW[currency].CHANGEPCTDAY < 0" name="trending-down" class="trend-status-icon"></ion-icon>
+                </ion-avatar>
+                <ion-label>
+                  <h3>{{listItem.RAW[currency].CHANGEPCTDAY}}%</h3>
+                  <p class="text">7 Days</p>
+                </ion-label>
+              </ion-item>
+            </ion-list>
+          </ion-card-content>
+
+          <!-- <ion-card-header>
+            <ion-chip *ngFor="let tag of listItem.tags" class="no-pointer">
+              <ion-label>{{tag}}</ion-label>
+            </ion-chip>
+          </ion-card-header> -->
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="disclaimer">
+    This webiste is for demo puposes only and demostrates an app with limited functionality.<br />
+    Copyright © 2018. All rights reserved
+  </div>
+
+</ion-content>

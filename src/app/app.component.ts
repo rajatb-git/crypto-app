@@ -13,13 +13,18 @@ import { UserModel } from 'src/app/models/user.model';
 })
 export class AppComponent {
 
-  user: UserModel;
+  user: UserModel = new UserModel();
 
   public appPages = [
     {
       title: 'Home',
       url: '/home',
       icon: 'home'
+    },
+    {
+      title: 'Top Cryptocurrencies',
+      url: '/list',
+      icon: 'trending-up'
     }
   ];
 

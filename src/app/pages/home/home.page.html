@@ -1,5 +1,4 @@
 <ion-header>
-
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button color="light"></ion-menu-button>
@@ -25,7 +24,7 @@
             <ion-card-title>
               <span>{{result.name}} ({{result.symbol}})</span>
               <span class="close-icon">
-                <ion-icon name="close" (click)="reset()"></ion-icon>
+                <ion-icon name="close" (click)="reset()" class="pointer"></ion-icon>
               </span>
             </ion-card-title>
           </ion-card-header>
@@ -73,7 +72,7 @@
           </ion-card-content>
 
           <ion-card-header>
-            <ion-chip *ngFor="let tag of result.tags">
+            <ion-chip *ngFor="let tag of result.tags" class="no-pointer">
               <ion-label>{{tag}}</ion-label>
             </ion-chip>
           </ion-card-header>

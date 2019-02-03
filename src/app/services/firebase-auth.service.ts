@@ -9,6 +9,7 @@ import * as firebase from 'firebase';
 import { environment } from 'src/environments/environment';
 import { UserModel } from '../models/user.model';
 import { SharedService } from './shared.service';
+import { ResponseI } from '../models/shared.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class FirebaseAuthService {
 
   backendUrl: string = environment.backendUrl;
   rb_api_endpoints: any = environment.rb_api_endpoints;
-  token: string;
+  token: string = "";
   loggedInUser: UserModel = new UserModel();
 
   constructor(
@@ -34,24 +35,30 @@ export class FirebaseAuthService {
         this.afAuth.auth.createUserWithEmailAndPassword(value.email, value.password)
           .then(user => {
 
-            user.user.updateProfile({
-              displayName: value.name,
-              photoURL: ""
-            });
+            if (user)
+              if (user.user) {
+                user.user.updateProfile({
+                  displayName: value.name,
+                  photoURL: ""
+                });
 
-            this.loggedInUser = {
-              createdOn: new Date(),
-              name: value.name,
-              modifiedOn: new Date(),
-              email: value.email,
-              id: user.user.uid
-            };
+                this.loggedInUser = {
+                  createdOn: new Date(),
+                  name: value.name,
+                  modifiedOn: new Date(),
+                  email: value.email,
+                  id: user.user.uid
+                };
 
-            this.sService.loggedInUser.next(this.loggedInUser);
+                this.sService.loggedInUser.next(this.loggedInUser);
 
-            this.addNewUserDetails(this.loggedInUser);
+                this.addNewUserDetails(this.loggedInUser);
 
-            return resolve();
+                return resolve();
+              }
+
+            return reject();
+
           }, error => reject(error));
       });
     }
@@ -67,18 +74,23 @@ export class FirebaseAuthService {
         this.afAuth.auth.signInWithEmailAndPassword(value.email, value.password)
           .then(async res => {
 
-            this.afStore.collection('users').doc(res.user.uid).update({
-              'logs.loginHistory': firebase.firestore.FieldValue.arrayUnion(new Date())
-            });
+            if (res && res.user) {
+              this.afStore.collection('users').doc(res.user.uid).update({
+                'logs.loginHistory': firebase.firestore.FieldValue.arrayUnion(new Date())
+              });
 
-            await this.afStore.collection('users').doc(res.user.uid).get().subscribe(res => {
-              this.loggedInUser = res.data().metadata as UserModel;
-              this.sService.loggedInUser.next(res.data().metadata as UserModel);
-            }, error => {
+              await this.afStore.collection('users').doc(res.user.uid).get().subscribe(response => {
+                if (response) {
+                  this.loggedInUser = response.data().metadata as UserModel;
+                  this.sService.loggedInUser.next(response.data().metadata as UserModel);
+                }
+              }, error => {
 
-            });
+              });
 
-            return resolve(res);
+              return resolve(res);
+            }
+
           }, error => reject(error))
       });
     }
@@ -93,7 +105,7 @@ export class FirebaseAuthService {
         await this.afAuth.auth.onAuthStateChanged((user) => {
           if (user) {
             this.loggedInUser.id = user.uid;
-            if(!this.loggedInUser.name) {
+            if (!this.loggedInUser.name) {
               this.getUserDetails();
             }
             return resolve(true);
@@ -109,17 +121,22 @@ export class FirebaseAuthService {
   }
 
   async doLogout(): Promise<void> {
+    this.sService.logoutUser();
     return await this.afAuth.auth.signOut();
   }
 
   async getUserDetails() {
 
+    if(!this.loggedInUser || !this.loggedInUser.id) return;
+    
     return new Promise<any>((resolve, reject) => {
       this.afStore.collection('users').doc(this.loggedInUser.id).get().subscribe(res => {
-        this.loggedInUser = res.data().metadata as UserModel;
-        this.sService.loggedInUser.next(res.data().metadata as UserModel);
+        if (res) {
+          this.loggedInUser = res.data().metadata as UserModel;
+          this.sService.loggedInUser.next(res.data().metadata as UserModel);
 
-        return resolve(res.data().metadata);
+          return resolve(res.data().metadata);
+        }
       });
     });
   }
@@ -153,7 +170,7 @@ export class FirebaseAuthService {
 
         this.http.post((this.backendUrl + this.rb_api_endpoints.addNewUser),
           { user: user }, httpOptions)
-          .subscribe((response) => {
+          .subscribe((response: ResponseI) => {
 
             if (response['status'] === true)
               return resolve(response['data']);

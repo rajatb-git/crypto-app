@@ -18,7 +18,7 @@ export class HomePage implements OnInit {
     symbol: new FormControl('', Validators.compose([Validators.required])),
     convert: new FormControl('', Validators.compose([Validators.required]))
   });
-  errorMsg: string = null;
+  errorMsg: string = "";
   result: any = null;
   loading: any = null;
 
@@ -28,8 +28,7 @@ export class HomePage implements OnInit {
     private taptic: TapticEngine,
     private fAuthService: FirebaseAuthService,
     private router: Router,
-    private toastCtrl: ToastController,
-    private sService: SharedService
+    private toastCtrl: ToastController
   ) { }
 
   ngOnInit() { }
@@ -75,7 +74,7 @@ export class HomePage implements OnInit {
 
   reset() {
     this.result = null;
-    this.errorMsg = null;
+    this.errorMsg = "";
   }
 
   private capitalize() {

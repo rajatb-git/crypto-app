@@ -13,9 +13,9 @@ import { FirebaseAuthService } from '../../services/firebase-auth.service';
 })
 export class SignupPage implements OnInit {
 
-  signupForm: FormGroup;
-  errorMsg: string;
-  isPlatformIos: boolean;
+  signupForm: any;
+  errorMsg: string = "";
+  isPlatformIos: boolean = false;
 
   constructor(
     private fAuthService: FirebaseAuthService,
@@ -88,7 +88,7 @@ export class SignupPage implements OnInit {
   }
 
   reset(): void {
-    this.errorMsg = null;
+    this.errorMsg = "";
   }
 
 }

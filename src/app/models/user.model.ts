@@ -4,4 +4,12 @@ export class UserModel {
     id: string;
     createdOn: Date;
     modifiedOn: Date;
+
+    constructor() {
+        this.name = "";
+        this.email =  "";
+        this.id =  "";
+        this.createdOn =  new Date();
+        this.modifiedOn =  new Date();
+    }
 }
