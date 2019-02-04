@@ -12,7 +12,7 @@ export const environment = {
     storageBucket: "rb-app-172b5.appspot.com",
     messagingSenderId: "250422010518"
   },
-  backendUrl: "http://localhost:3000/",
+  backendUrl: "https://rbapi.herokuapp.com/",
   rb_api_endpoints: {
     getCustomQuote: 'getCustomQuote',
     getTopMarketCap: 'getTopMarketCap',

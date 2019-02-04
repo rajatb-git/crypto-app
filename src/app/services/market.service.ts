@@ -55,6 +55,7 @@ export class MarketService {
   }
 
   async getTopMarketCap(limit: number, currency: string): Promise<any> {
+    limit = +(limit);
 
     try {
 
