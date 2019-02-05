@@ -20,6 +20,9 @@ const routes: Routes = [
     path: 'list', canActivate: [AuthGuard], loadChildren: './pages/list/list.module#ListPageModule'
   },
   {
+    path: 'news-list', canActivate: [AuthGuard], loadChildren: './pages/news-list/news-list.module#NewsListPageModule'
+  },
+  {
     path: '**', redirectTo: 'login'
   }
 ];

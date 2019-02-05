@@ -27,7 +27,7 @@
               <ion-col no-padding size="6">
                 <ion-item>
                   <ion-label>Top</ion-label>
-                  <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="10"
+                  <ion-select [interfaceOptions]="customActionSheetOptionsLimit" interface="action-sheet" placeholder="10"
                     [(ngModel)]="limit" (ionChange)="getData()">
                     <ion-select-option value="10">10</ion-select-option>
                     <ion-select-option value="20">20</ion-select-option>
@@ -41,7 +41,7 @@
               <ion-col no-padding size="6">
                 <ion-item>
                   <ion-label>Currency</ion-label>
-                  <ion-select [interfaceOptions]="customActionSheetOptions" interface="action-sheet" placeholder="USD"
+                  <ion-select [interfaceOptions]="customActionSheetOptionsCurrency" interface="action-sheet" placeholder="USD"
                     [(ngModel)]="currency" (ionChange)="getData()">
                     <ion-select-option value="USD">USD</ion-select-option>
                     <ion-select-option value="INR">INR</ion-select-option>

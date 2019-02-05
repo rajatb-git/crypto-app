@@ -25,7 +25,12 @@ export class AppComponent {
       title: 'Top Cryptocurrencies',
       url: '/list',
       icon: 'trending-up'
-    }
+    },
+    {
+      title: 'Crypto News',
+      url: '/news-list',
+      icon: 'book'
+    },
   ];
 
   constructor(

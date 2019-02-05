@@ -9,3 +9,14 @@ export interface CryptoCompareResponseI {
     RAW?: Object;
     DISPLAY?: Object;
 }
+
+export interface CryptoCompareNewsResponseI {
+    id: string;
+    published_on: string;
+    imageurl: string;
+    title: string;
+    url: string;
+    source: string;
+    body: string;
+    tags: string;
+}

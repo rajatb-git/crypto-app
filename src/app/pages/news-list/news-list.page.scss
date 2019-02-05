@@ -1,0 +1,104 @@
+.news-list-page {
+    --background: var(--ion-color-dark);
+
+    ion-card {
+        --background: var(--ion-color-black);
+
+        ion-input {
+            color: var(--ion-color-white);
+            font-weight: 500;
+        }
+    }
+
+    ion-select::shadow.select-text {
+        flex: none;
+        min-width: auto;
+    }
+
+    :host(.select-text) {
+        flex: none;
+        min-width: auto;
+    }
+
+    .text {
+        color: var(--ion-color-light);
+    }
+
+    .border-bottom {
+        border-bottom: 0.5px solid var(--ion-color-medium);
+    }
+
+    .transparent-card {
+        --background: transparent;
+        box-shadow: none;
+
+        ion-item {
+            --background: transparent;
+            color: var(--ion-color-light);
+
+            ion-label {
+                flex: none;
+            }
+        }
+    }
+
+    .listItem-card {
+        color: var(--ion-color-white);
+
+        ion-card-title {
+            color: var(--ion-color-white);
+
+            ion-avatar {
+                float: left;
+                top: 1px;
+                position: relative;
+                margin-right: 5px;
+                width: 25px;
+                height: 25px;
+            }
+        }
+
+        .name {
+            float: left;
+        }
+
+        .symbol {
+            float: right;
+        }
+
+        .close-icon {
+            float: right;
+            font-size: 2rem;
+        }
+
+        ion-chip {
+            background: var(--ion-color-medium);
+        }
+
+        .percentage-changes-list {
+
+            .down {
+                color: var(--ion-color-danger);
+                --background: var(--ion-color-black);
+            }
+
+            .up {
+                color: var(--ion-color-success);
+                --background: var(--ion-color-black);
+            }
+
+            .trend-status-icon {
+                font-size: 2.5rem;
+            }
+
+            .result-value {
+                color: white;
+                font-weight: 600;
+            }
+
+            .result-value-unit {
+                color: white;
+            }
+        }
+    }
+}

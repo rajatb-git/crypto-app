@@ -12,6 +12,7 @@ export const environment = {
   rb_api_endpoints: {
     getCustomQuote: 'getCustomQuote',
     getTopMarketCap: 'getTopMarketCap',
-    addNewUser: 'addNewUser'
+    addNewUser: 'addNewUser',
+    getNews: 'getNews'
   }
 };

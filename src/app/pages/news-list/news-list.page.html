@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="doLogout()">
+        <ion-icon name="power"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      Crypto News
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="news-list-page">
+
+  <ion-grid fixed>
+    <ion-row no-padding>
+      <ion-col no-padding offset-md="2" size-md="8" size="12" offset-lg="2" size-lg="8">
+
+        <ion-card class="transparent-card">
+          <ion-card-content no-padding>
+            <ion-row no-padding>
+              <ion-col no-padding size="6">
+                <ion-item>
+                  <ion-label>Sort By</ion-label>
+                  <ion-select [interfaceOptions]="customActionSheetOptionsSort" interface="action-sheet" placeholder="10"
+                    [(ngModel)]="sortOrder" (ionChange)="getData()">
+                    <ion-select-option value="latest">Latest</ion-select-option>
+                    <ion-select-option value="popular">Popular</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+
+              <ion-col no-padding size="6">
+                <ion-item>
+                  <ion-label>Category</ion-label>
+                  <ion-select [interfaceOptions]="customActionSheetOptionsCategory" interface="action-sheet" placeholder="All"
+                    [(ngModel)]="category" (ionChange)="getData()">
+                    <ion-select-option *ngFor="let singleCategory of categories" [value]="singleCategory">{{singleCategory}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card class="listItem-card" *ngFor="let listItem of listingData">
+          <ion-img [src]="listItem.imageurl" class="pointer" (click)="goToSource(listItem.url)"></ion-img>
+          <ion-card-header class="top">
+            <ion-card-title class="text pointer" (click)="goToSource(listItem.url)">{{listItem.title}}</ion-card-title>
+            <ion-card-subtitle class="text">{{listItem.title}}</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            <p class="text">{{listItem.body}}</p>
+          </ion-card-content>
+
+          <!-- <ion-card-header>
+              <ion-chip *ngFor="let tag of listItem.tags" class="no-pointer">
+                <ion-label>{{tag}}</ion-label>
+              </ion-chip>
+            </ion-card-header> -->
+        </ion-card>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="disclaimer">
+    This website is for demo puposes only and demostrates an app with limited functionality.<br />
+    Copyright © 2018. All rights reserved
+  </div>
+
+</ion-content>

@@ -1,32 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { LoadingController, ToastController } from '@ionic/angular';
-import { Router } from '@angular/router';
 import { TapticEngine } from '@ionic-native/taptic-engine/ngx';
+import { Router } from '@angular/router';
 
-import { MarketService } from 'src/app/services/market.service';
-import { CryptoCompareResponseI } from 'src/app/models/shared.model';
 import { FirebaseAuthService } from 'src/app/services/firebase-auth.service';
+import { MarketService } from 'src/app/services/market.service';
+import { CryptoCompareResponseI, CryptoCompareNewsResponseI } from 'src/app/models/shared.model';
 
 @Component({
-  selector: 'app-list',
-  templateUrl: './list.page.html',
-  styleUrls: ['./list.page.scss'],
+  selector: 'app-news-list',
+  templateUrl: './news-list.page.html',
+  styleUrls: ['./news-list.page.scss'],
 })
-export class ListPage implements OnInit {
+export class NewsListPage implements OnInit {
 
   loading: any;
   listingData: any;
-  limit: number = 10;
-  currency: string = 'USD';
+  sortOrder: string = 'latest';
+  category: string = 'all';
+  categories: Array<string> = ["BTC","ETH","LTC","XMR","ZEC","ETC","XRP","TRX","ADA","DASH","XTZ","USDT","Mining","Exchange","Market","Asia","ICO","Regulation","Blockchain","Trading","Technology","Wallet","Altcoin","Fiat","Business","Commodity","Sponsored"];
 
-  customActionSheetOptionsLimit: any = {
-    header: 'Limit',
-    subHeader: 'Number of items!'
+  customActionSheetOptionsSort: any = {
+    header: 'Sort By',
+    subHeader: 'Pick a sort order!'
   };
 
-  customActionSheetOptionsCurrency: any = {
-    header: 'Currency',
-    subHeader: 'Select a currency!'
+  customActionSheetOptionsCategory: any = {
+    header: 'Categories',
+    subHeader: 'Select a category!'
   };
 
   constructor(
@@ -45,8 +46,8 @@ export class ListPage implements OnInit {
   getData() {
     this.showLoading();
 
-    this.marketService.getTopMarketCap(this.limit, this.currency).then(res => {
-      this.listingData = res as Array<CryptoCompareResponseI>;
+    this.marketService.getNews(this.sortOrder, this.category).then(res => {
+      this.listingData = res as Array<CryptoCompareNewsResponseI>;
 
       this.taptic.notification({
         type: "success"
@@ -68,6 +69,10 @@ export class ListPage implements OnInit {
       });
       await this.loading.present();
     }
+  }
+
+  goToSource(url) {
+    window.open(url, '_blank');
   }
 
   async removeLoading() {

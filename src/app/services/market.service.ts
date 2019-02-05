@@ -89,4 +89,39 @@ export class MarketService {
       return Promise.reject(error);
     }
   }
+
+  async getNews(sortOrder?: string, category?: string): Promise<any> {
+
+    try {
+
+      await this.fAuthService.getToken().then(response => {
+        this.token = response;
+      });
+
+      let httpOptions = {
+        headers: new HttpHeaders({
+          'Content-Type': 'application/json',
+          'Authorization': this.token
+        })
+      };
+
+      return new Promise((resolve, reject) => {
+
+        this.http.post((this.backendUrl + this.rb_api_endpoints.getNews),
+          { sortOrder: sortOrder, category: category }, httpOptions)
+          .subscribe((response: ResponseI) => {
+
+            if (response['status'] === true)
+              return resolve(response['data']);
+            else if(response['status'] === false)
+              return reject(response['message']);
+          }, error => {
+            return reject(error);
+          });
+      });
+    }
+    catch (error) {
+      return Promise.reject(error);
+    }
+  }
 }
