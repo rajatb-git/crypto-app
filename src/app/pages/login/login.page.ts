@@ -41,7 +41,7 @@ export class LoginPage implements OnInit {
     });
 
     await this.fAuthService.isLoggedIn().then(res => {
-      if(res) {
+      if (res) {
         this.router.navigate(['/home']);
       }
     });
@@ -166,7 +166,7 @@ export class LoginPage implements OnInit {
 
           await alert.present();
         }).catch(error => {
-          // this.showToast(error.message);
+          this.removeLoading();
         });
 
         this.router.navigate(['/home']);
@@ -174,11 +174,13 @@ export class LoginPage implements OnInit {
         this.tapticNotification('error');
 
         this.reset();
-        this.errorMsg = "Wrong email / password!";
+        this.errorMsg = error.message
+
+        this.removeLoading();
       });
     }
     catch (error) {
-
+      
     }
     finally {
       this.removeLoading();

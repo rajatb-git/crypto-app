@@ -7,7 +7,7 @@ import { AngularFirestore } from 'angularfire2/firestore';
 import * as firebase from 'firebase';
 
 import { environment } from 'src/environments/environment';
-import { UserModel } from '../models/user.model';
+import { UserModel, SettingsModel } from '../models/user.model';
 import { SharedService } from './shared.service';
 import { ResponseI } from '../models/shared.model';
 
@@ -47,7 +47,8 @@ export class FirebaseAuthService {
                   name: value.name,
                   modifiedOn: new Date(),
                   email: value.email,
-                  id: user.user.uid
+                  id: user.user.uid,
+                  settings: new SettingsModel()
                 };
 
                 this.sService.loggedInUser.next(this.loggedInUser);
@@ -68,7 +69,6 @@ export class FirebaseAuthService {
   }
 
   doLogin(value: any): Promise<any> {
-    debugger;
     try {
       return new Promise<any>((resolve, reject) => {
         this.afAuth.auth.signInWithEmailAndPassword(value.email, value.password)

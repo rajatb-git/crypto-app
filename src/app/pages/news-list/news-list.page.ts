@@ -20,14 +20,16 @@ export class NewsListPage implements OnInit {
   category: string = 'all';
   categories: Array<string> = ["BTC","ETH","LTC","XMR","ZEC","ETC","XRP","TRX","ADA","DASH","XTZ","USDT","Mining","Exchange","Market","Asia","ICO","Regulation","Blockchain","Trading","Technology","Wallet","Altcoin","Fiat","Business","Commodity","Sponsored"];
 
-  customActionSheetOptionsSort: any = {
+  customOptionsSort: any = {
     header: 'Sort By',
-    subHeader: 'Pick a sort order!'
+    subHeader: 'Pick a sort order!',
+    translucent: true
   };
 
-  customActionSheetOptionsCategory: any = {
+  customOptionsCategory: any = {
     header: 'Categories',
-    subHeader: 'Select a category!'
+    subHeader: 'Select a category!',
+    translucent: true
   };
 
   constructor(

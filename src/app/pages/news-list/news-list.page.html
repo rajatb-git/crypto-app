@@ -5,10 +5,11 @@
     </ion-buttons>
 
     <ion-buttons slot="end">
-      <ion-button color="light" (click)="doLogout()">
-        <ion-icon name="power"></ion-icon>
+      <ion-button color="light" (click)="goToSettings()">
+        <ion-icon name="settings"></ion-icon>
       </ion-button>
     </ion-buttons>
+
     <ion-title>
       Crypto News
     </ion-title>
@@ -27,8 +28,8 @@
               <ion-col no-padding size="6">
                 <ion-item>
                   <ion-label>Sort By</ion-label>
-                  <ion-select [interfaceOptions]="customActionSheetOptionsSort" interface="action-sheet" placeholder="10"
-                    [(ngModel)]="sortOrder" (ionChange)="getData()">
+                  <ion-select [interfaceOptions]="customOptionsSort" interface="alert" placeholder="10" [(ngModel)]="sortOrder"
+                    (ionChange)="getData()">
                     <ion-select-option value="latest">Latest</ion-select-option>
                     <ion-select-option value="popular">Popular</ion-select-option>
                   </ion-select>
@@ -38,7 +39,7 @@
               <ion-col no-padding size="6">
                 <ion-item>
                   <ion-label>Category</ion-label>
-                  <ion-select [interfaceOptions]="customActionSheetOptionsCategory" interface="action-sheet" placeholder="All"
+                  <ion-select [interfaceOptions]="customOptionsCategory" interface="alert" placeholder="All"
                     [(ngModel)]="category" (ionChange)="getData()">
                     <ion-select-option *ngFor="let singleCategory of categories" [value]="singleCategory">{{singleCategory}}</ion-select-option>
                   </ion-select>

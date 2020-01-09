@@ -27,5 +27,13 @@
                 color: var(--ion-color-light);
             }
         }
+
+        .side-menu-logout-div {
+            text-align: center;
+            
+            ion-button{
+                color: var(--ion-color-light);
+            }
+        }
     }
 }

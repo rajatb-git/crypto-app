@@ -15,6 +15,30 @@
   }
 
   .fetch-quote-card {
+    ion-card-content {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+
+    ion-item {
+      --background: var(--ion-color-black);
+      ion-label {
+        color: var(--ion-color-light);
+        width: 50%
+      }
+      ion-input {
+        width: 50%
+      }
+    }
+
+    ion-item.list-item {
+      border-bottom: 1px solid var(--ion-color-light);
+    }
+
+    ion-item.last-item {
+      --inner-border-width: 0;
+    }
+
     .all-caps {
       text-transform: uppercase;
     }

@@ -5,8 +5,8 @@
     </ion-buttons>
 
     <ion-buttons slot="end">
-      <ion-button color="light" (click)="doLogout()">
-        <ion-icon name="power"></ion-icon>
+      <ion-button color="light" (click)="goToSettings()">
+        <ion-icon name="settings"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title>
@@ -78,22 +78,32 @@
           </ion-card-header>
         </ion-card>
       </ion-col>
-
+ 
       <ion-col no-padding offset-md="3" size-md="6" size="12">
         <ion-card class="fetch-quote-card">
           <form [formGroup]="cryptoForm" (ngSubmit)="submitCryptoForm()">
             <ion-img src="/assets/crypto.jpeg"></ion-img>
             <ion-card-header class="top">
-              <ion-card-subtitle class="text">Fetch current market rate</ion-card-subtitle>
+              <ion-card-subtitle class="text">Check current market rate</ion-card-subtitle>
             </ion-card-header>
 
             <ion-card-content>
               <div class="error">{{errorMsg}}</div>
-              <ion-input class="all-caps border-bottom" placeholder="Currency Symbol" clear-input="true"
-                formControlName="symbol" type="text"></ion-input>
+              <ion-item class="list-item">
+                <ion-label>
+                  Cryptocurrency
+                </ion-label>
+                <ion-input class="all-caps" clear-input="true" placeholder="BTC" formControlName="symbol"
+                  type="text" fixed></ion-input>
+              </ion-item>
 
-              <ion-input class="all-caps" placeholder="Conversion Unit" clear-input="true" formControlName="convert"
-                type="text"></ion-input>
+              <ion-item class="last-item">
+                <ion-label>
+                  Currency
+                </ion-label>
+                <ion-input class="all-caps" placeholder="USD" clear-input="true" formControlName="convert"
+                  type="text" fixed></ion-input>
+              </ion-item>
             </ion-card-content>
 
             <ion-card-header>

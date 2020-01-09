@@ -5,8 +5,6 @@ import { TapticEngine } from '@ionic-native/taptic-engine/ngx';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { MarketService } from '../../services/market.service';
-import { FirebaseAuthService } from '../../services/firebase-auth.service';
-import { SharedService } from '../../services/shared.service';
 
 @Component({
   selector: 'app-home',
@@ -26,7 +24,6 @@ export class HomePage implements OnInit {
     private marketService: MarketService,
     private loadingCtrl: LoadingController,
     private taptic: TapticEngine,
-    private fAuthService: FirebaseAuthService,
     private router: Router,
     private toastCtrl: ToastController
   ) { }
@@ -105,17 +102,15 @@ export class HomePage implements OnInit {
     }
   }
 
+  goToSettings() {
+    this.router.navigate(['/settings']);
+  }
+
   async removeLoading() {
     if (this.loading) {
       await this.loading.dismiss();
       this.loading = null;
     }
-  }
-
-  async doLogout() {
-    this.taptic.selection();
-    await this.fAuthService.doLogout();
-    this.router.navigate(['/login']);
   }
 
   async showToast(message: string) {

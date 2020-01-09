@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+
+    <ion-title>Settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="settings-content">
+
+  <ion-grid fixed>
+    <ion-row no-padding>
+
+      <ion-col no-padding offset-md="3" size-md="6" size="12">
+        <ion-card class="fetch-quote-card">
+          <form [formGroup]="settingsForm" (ngSubmit)="saveForm()">
+            <ion-card-header class="top">
+              <ion-card-subtitle class="text">Personalization</ion-card-subtitle>
+            </ion-card-header>
+
+            <ion-card-content>
+              <div class="error">{{errorMsg}}</div>
+              <ion-item>
+                <ion-label>Main Currency</ion-label>
+                <ion-select [interfaceOptions]="customOptionsCurrency" interface="alert" placeholder="Select one"
+                  formControlName="currency">
+                  <ion-select-option value="USD">USD</ion-select-option>
+                  <ion-select-option value="INR">INR</ion-select-option>
+                  <ion-select-option value="EUR">EUR</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-card-content>
+
+            <ion-card-header>
+              <ion-button expand="block" color="medium" type="submit" [disabled]="!settingsForm.valid">Save</ion-button>
+            </ion-card-header>
+          </form>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <div class="disclaimer">
+    This website is for demo puposes only and demostrates an app with limited functionality.<br />
+    Copyright © 2018. All rights reserved
+  </div>
+
+</ion-content>

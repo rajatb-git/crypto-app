@@ -23,6 +23,9 @@ const routes: Routes = [
     path: 'news-list', canActivate: [AuthGuard], loadChildren: './pages/news-list/news-list.module#NewsListPageModule'
   },
   {
+    path: 'settings', canActivate: [AuthGuard], loadChildren: './pages/settings/settings.module#SettingsPageModule'
+  },
+  {
     path: '**', redirectTo: 'login'
   }
 ];

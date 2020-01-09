@@ -3,6 +3,7 @@ import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from
 import { Observable } from 'rxjs';
 
 import { FirebaseAuthService } from '../services/firebase-auth.service';
+import { SharedService } from '../services/shared.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,8 @@ export class AuthGuard implements CanActivate {
 
   constructor(
     private fAuthService: FirebaseAuthService,
-    private router: Router
+    private router: Router,
+    private sService: SharedService
   ) { }
 
   canActivate(
@@ -20,8 +22,15 @@ export class AuthGuard implements CanActivate {
 
     let url: string = state.url;
 
+    // return true;
+
     return this.fAuthService.isLoggedIn().then(response => {
       if (response && response === true) {
+
+        if(!this.sService.loggedInUser.value.id) {
+          this.fAuthService.getUserDetails();
+        }
+
         return true;
       }
 
@@ -30,6 +39,6 @@ export class AuthGuard implements CanActivate {
     }).catch(error => {
       this.router.navigate(['/login']);
       return false;
-    })
+    });
   }
 }

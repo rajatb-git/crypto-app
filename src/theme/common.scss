@@ -32,3 +32,11 @@ ion-toolbar {
 .pointer {
     cursor: pointer;
 }
+
+ion-label {
+    white-space: normal;
+}
+
+ion-select {
+    max-width: none;
+}

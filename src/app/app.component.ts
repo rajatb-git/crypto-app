@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Platform } from '@ionic/angular';
+import { Router } from '@angular/router';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 
@@ -11,7 +12,7 @@ import { UserModel } from 'src/app/models/user.model';
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
 
   user: UserModel = new UserModel();
 
@@ -38,15 +39,30 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private sService: SharedService,
-    private fAuthService: FirebaseAuthService
+    private fAuthService: FirebaseAuthService,
+    private router: Router
   ) {
+
+  }
+
+  ngOnInit() {
     this.initializeApp();
+  }
+
+  ngOnDestroy() {
+    if (this.platform.is('cordova')) {
+      this.fAuthService.doLogout();
+    }
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
+
+      if (this.platform.is('cordova')) {
+        this.fAuthService.doLogout();
+      }
 
       // this.user = this.sService.loggedInUser;
       this.sService.loggedInUser.subscribe(value => {
@@ -59,5 +75,10 @@ export class AppComponent {
         }
       });
     });
+  }
+
+  async doLogout() {
+    await this.fAuthService.doLogout();
+    this.router.navigate(['/login']);
   }
 }
