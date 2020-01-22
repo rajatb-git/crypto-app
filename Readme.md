@@ -1,4 +1,4 @@
-## https://rb-crypto-app.herokuapp.com/home
+## https://rb-crypto-app.herokuapp.com
 
 This is the original version of the Crypto App written in Typescript built using Ionic Framework, Firebase, Firestore etc.
 
