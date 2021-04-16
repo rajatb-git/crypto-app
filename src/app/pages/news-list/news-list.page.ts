@@ -18,7 +18,7 @@ export class NewsListPage implements OnInit {
   listingData: any;
   sortOrder: string = 'latest';
   category: string = 'all';
-  categories: Array<string> = ["BTC","ETH","LTC","XMR","ZEC","ETC","XRP","TRX","ADA","DASH","XTZ","USDT","Mining","Exchange","Market","Asia","ICO","Regulation","Blockchain","Trading","Technology","Wallet","Altcoin","Fiat","Business","Commodity","Sponsored"];
+  categories: Array<string> = ["BTC","ETH","DOGE","LTC","XMR","ZEC","ETC","XRP","TRX","ADA","DASH","XTZ","USDT","Mining","Exchange","Market","Asia","ICO","Regulation","Blockchain","Trading","Technology","Wallet","Altcoin","Fiat","Business","Commodity","Sponsored"];
 
   customOptionsSort: any = {
     header: 'Sort By',
